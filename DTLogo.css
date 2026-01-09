@@ -1,0 +1,126 @@
+:root {
+  --dt-cyan: #00ffcc;
+  --dt-blue: #0072ff;
+  --dt-text-primary: #ffffff;
+}
+
+.dt-logo-wrapper {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* CLEAN PHYSICS: Smooth floating, no shaking */
+  animation: float-clean 5s ease-in-out infinite;
+  /* CRITICAL: No background blur or overflow to prevent "muddy" look */
+  background: transparent;
+  isolation: isolate;
+}
+
+/* 1. Main Text - SHARP RENDERING */
+.dt-main-text {
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 1;
+  /* Clean Gradient */
+  background: linear-gradient(135deg, #ffffff 30%, var(--dt-cyan) 60%, var(--dt-blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 10;
+  /* FIX: Tight, clean shadow instead of glowing blur */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); 
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: -2px;
+}
+
+/* 2. Glass Sheen - Subtle & Sharp */
+.dt-main-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  transform: skewX(-20deg);
+  animation: sheen-pass 4s infinite;
+  pointer-events: none;
+}
+
+/* 3. Subtext - High Contrast */
+.dt-sub-text {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  color: var(--dt-cyan);
+  text-transform: uppercase;
+  /* Clean shadow, no bloom */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+/* 4. Orbit System - Depth without Blur */
+.orbit-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.orbit-dot {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.dot-primary {
+  width: 12px;
+  height: 12px;
+  background-color: var(--dt-cyan);
+  /* Hard shadow for 3D feel, not glow */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  top: 50%;
+  left: 50%;
+  animation: orbit-x 3s linear infinite;
+}
+
+.dot-secondary {
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  top: 50%;
+  left: 50%;
+  animation: orbit-y 4.5s linear infinite;
+}
+
+/* --- PHYSICS ENGINE --- */
+@keyframes float-clean {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes sheen-pass {
+  0% { left: -150%; }
+  40%, 100% { left: 150%; }
+}
+
+@keyframes orbit-x {
+  0% { transform: translate(-110px, 0) scale(0.7); z-index: 1; }
+  25% { transform: translate(0, 35px) scale(1.2); z-index: 20; } /* Front */
+  50% { transform: translate(110px, 0) scale(0.7); z-index: 1; }
+  75% { transform: translate(0, -35px) scale(0.5); z-index: 1; } /* Back */
+  100% { transform: translate(-110px, 0) scale(0.7); z-index: 1; }
+}
+
+@keyframes orbit-y {
+  0% { transform: translate(60px, -50px) scale(0.6); z-index: 1; }
+  50% { transform: translate(-60px, 50px) scale(1.1); z-index: 20; }
+  100% { transform: translate(60px, -50px) scale(0.6); z-index: 1; }
+}

@@ -1,0 +1,80 @@
+
+.matrix-loader-container {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  background-color: #000000;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(15, 255, 0, 0.3);
+  margin: 1.5rem 0;
+  border: 1px solid rgba(15, 255, 0, 0.4);
+}
+
+/* طبقة الكانفاس للمطر الرقمي */
+.matrix-rain-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.matrix-content-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 5px 25px;
+  border-radius: 30px;
+}
+
+.matrix-text-main {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
+  animation: cyberpunk-glitch 3s steps(1) infinite;
+}
+
+.matrix-counter {
+  color: #0f0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.8rem;
+  font-weight: 900;
+  min-width: 70px;
+  text-shadow: 0 0 10px #0f0;
+}
+
+/* أنيميشن الخلل التقني (Glitch) */
+@keyframes cyberpunk-glitch {
+  0%, 90%, 100% {
+    transform: translate(0);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  }
+  91% {
+    transform: translate(-3px, 2px);
+    text-shadow: 3px 0 red, -3px 0 blue;
+  }
+  93% {
+    transform: translate(3px, -2px);
+    text-shadow: -3px 0 red, 3px 0 blue;
+  }
+  95% {
+    transform: translate(-1px, -1px);
+    text-shadow: 1px 0 green, -1px 0 purple;
+  }
+  97% {
+    transform: translate(2px, 1px);
+    text-shadow: -2px 0 yellow, 2px 0 cyan;
+  }
+}
